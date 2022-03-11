@@ -10,7 +10,8 @@ Sentry,Adopt,Dev Tools,No,"<a href=""https://sentry.io/auth/login/creditas-zb/""
 Rollbar,Hold,Dev Tools,No,Rollbar is an error tracking service which was replaced by Sentry
 Backstage,Adopt,Platform,Yes,"Backstage is a platform for building developer portals, and it's the base for our <a href=""https://developerhub.creditas.io/"">Developer Hub</a>"
 CircleCI,Adopt,Platform,Yes,CircleCI is the standard Continuous Integration platform at Creditas.
-GitHub,Adopt,Platform,No,"<a href=""GitHub"">https://github.com/creditas</a> is our source control platform"
+Jenkins,Hold,Platform,No,"<a href=""https://jenkins.io"">Jenkins</a> is a legacy Continuous Integration software used by Creditoo (Payroll) legacy applications. New applications and services should use CircleCI instead."
+GitHub,Adopt,Platform,No,"<a href=""https://github.com/creditas"">GitHub</a> is our source control platform"
 GitHub Actions,Trial,Platform,Yes,GitHub Actions is a Continuous Integration platform native to GitHub.
 Kong API Gateway,Adopt,Platform,No,"<a href=""https://github.com/Creditas/kong"">Kong</a> is our API Gateway, responsible for exposing Creditas' APIs to the internet"
 AWS API Gateway,Hold,Platform,No,"AWS API Gateway was used prior to adopting Kong, but it has shown to be too limited and complex"
@@ -44,8 +45,9 @@ alibi-detect,Adopt,Data Management,Yes,"<a href=""https://docs.seldon.io/project
 scikit-multiflow,Adopt,Data Management,Yes,"<a href=""https://scikit-multiflow.github.io/"">scikit-multiflow</a> is a machine learning package for streaming data in Python."
 LightGBM,Adopt,Data Management,No,"<a href=""https://lightgbm.readthedocs.io/en/latest/"">LightGBM</a>, short for Light Gradient Boosting Machine, is a free and open source distributed gradient boosting framework for machine learning."
 Grafana,Adopt,Data Management,Yes,"<a href=""https://grafana.com/"">Grafana</a> is a multi-platform open source analytics and interactive visualization web application."
-Superset,Hold,Data Management,No,"<a href=""https://superset.apache.org/"">Apache Superset</a> is an open-source software cloud-native application for data exploration and data visualization able to handle data at petabyte scale. "
+Superset,Assess,Data Management,No,"<a href=""https://superset.apache.org/"">Apache Superset</a> is an open-source software cloud-native application for data exploration and data visualization able to handle data at petabyte scale. "
 EKS,Adopt,Platform,No,"<a href=""https://aws.amazon.com/eks/"">Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service from AWS, and it's used as the foundation for our <b>Nucleon</b> platform"
+Elastic Container Service (ECS),Hold,Platform,No,"<a href=""https://aws.amazon.com/ecs/"">Amazon Elastic Container Service (ECS) is a managed container service from AWS, which is deprecated. All containerized applications should use Nucleon's EKS instead."
 React.js,Adopt,Languages & Frameworks,No,The main framework to build frontend applications at Creditas
 React Native,Adopt,Languages & Frameworks,No,The main framework to build mobile applications at Creditas
 GKE,Hold,Platform,Yes,"A Kubernetes service managed by Google Cloud, used on Bcredi's services ecosystem"
@@ -56,30 +58,67 @@ Linkerd,Hold,Platform,Yes,"Linkerd is a service mesh for Kubernetes used on Bcre
 Google Cloud SQL (PostgreSQL),Hold,Data Management,Yes,"PostgreSQL database service managed by Google Cloud, used on Bcredi's services ecosystem"
 Sendgrid,Hold,Platform,Yes,"E-mail service provider, it was used on Bcredi's services ecosystem to sends e-mails to customers"
 InfoBip,Hold,Platform,Yes,"SMS service provider, it was used on Bcredi's services ecosystem to sends SMS to customers"
-Salesforce Creditas,Assess,Platform,Yes,Salesforce at Creditas still being implemented
+Salesforce Creditas,Assess,Platform,Yes,"Salesforce is a Customer Relationship Management (CRM) software-as-a-service platform, currently being implemented in Creditas"
 Salesforce Bcredi,Hold,Platform,Yes,The main backoffice tool for Bcredi operations
-Ruby,Adopt,Languages & Frameworks,No,Core & External Data & Servicing & Authentication & AutoFin Backend systems
-Sidekiq,Adopt,Languages & Frameworks,No,Message system for ruby components. This is default option
-BFF,Adopt,Languages & Frameworks,No,Backend end for frontend. Mobile and backoffice system uses this pattern to call our domain / components apis
+Ruby,Hold,Languages & Frameworks,No,"Used in a few legacy services and applications, like Core, External Data, Servicing, and AutoFin Backend systems. Also used in Authentication service."
+Sidekiq,Adopt,Languages & Frameworks,No,Background job scheduler Ruby services and applications. Should be the default choice for Ruby services and applications.
+Backend for Frontend (BFF),Adopt,Languages & Frameworks,No,Backend for Frontend is an architectural pattern used by our mobile and backoffice systems to call our domain / components APIs
 Apollo,Adopt,Languages & Frameworks,No,Framework to implement BFF as GraphQL
 GraphQL,Adopt,Languages & Frameworks,No,Pattern to expose API into a BFF
-RDS - Postgres,Adopt,Data Management,No,PostgreSQL database service managed by AWS. Used in most of Creditas components
-Mongo Atlas,Adopt,Data Management,No,Mongo managed database by Atlas service. Used in some components of creditas
-AWS Lambda,Hold,Platform,No,Not supported by Nuclen / Cliditas. Used in most Product Hacking systems.
-Camunda,Adopt,Platform,No,BPMS engine to support statefull workflows.
+RDS - PostgreSQL,Adopt,Data Management,No,PostgreSQL database service managed by AWS is the default data store for Creditas components
+MySQL,Hold,Data Management,No,"MySQL is a relational database used by legacy Creditoo (Payroll) services. For new services, PostgreSQL should be used instead."
+Mongo Atlas,Adopt,Data Management,No,Mongo managed database by Atlas service. Used in some components in Creditas
+AWS Lambda,Hold,Platform,No,Not supported by <b>Nucleon</b>/<pre>cliditas</pre>. Used in most Product Hacking solutions.
+Camunda,Adopt,Platform,No,"<a href=""https://camunda.com"">Camunda</a> is a Business Process Management System engine to support stateful workflows. Used by Journey platform component."
 Drools,Assess,Platform,Yes,BREs engine to support business rules strategy. It's been assessed by the Store team.
-Opsgenie,Adopt,Platform,No,Incident and alerting managing tool
-Rails,Adopt,Languages & Frameworks,No,Web framework for ruby components. This is the default choice
-Hanami,Hold,Languages & Frameworks,No,Web framework for ruby components. Used only on core.
-Spring,Adopt,Languages & Frameworks,No,Web and DI framework for kotlin components. This should be the default option.
-Typescript,Adopt,Languages & Frameworks,No,used in frontend and BFF applications. This should be the default option.
-Docker,Adopt,Platform,No,"Doc - Docker is an open platform for developing, shipping, and running applications. With Docker, you can manage your infrastructure in the same ways you manage your applications."
-Docker Compose,Adopt,Platform,No,"Doc - Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services."
-Dbeaver,Adopt,Dev Tools,No,Doc - DBeaver is a universal database management tool for everyone who needs to work with data in a professional way.
-Visual Studio Code,Adopt,Dev Tools,No,"Doc - Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. "
-aws-vault,Adopt,Platform,No,Doc - AWS Vault is a tool to securely store and access AWS credentials in a development environment.
-AWS Glue,Adopt,Data Management,No,"Doc - AWS Glue is a serverless data integration service that makes it easy to discover, prepare, and combine data for analytics, machine learning, and application development."
-Redash,Adopt,Data Management,No,Doc - Redash is an open source business intelligence web application
-Metabase,Adopt,Data Management,No,Doc - Metabase is a simple and powerful analytics tool which lets anyone learn and make decisions from their company’s data
-Tableau,Adopt,Data Management,No,Doc - Tableau is a visual analytics platform that want to transform the way people use data to solve problems.
-AWS EMR Studio,Adopt,Data Management,No,"Doc - EMR Studio is an integrated development environment (IDE) that makes it easy for data scientists and data engineers to develop, visualize, and debug data engineering and data science applications written in R, Python, Scala, and PySpark."
+Opsgenie,Adopt,Platform,No,"<a href=""https://creditas.app.opsgenie.com/"">Opsgenie</a> is the official Incident and alerting managing tool used in Creditas"
+Rails,Hold,Languages & Frameworks,No,"Web framework for Ruby components, used in a few legacy applications."
+Hanami,Hold,Languages & Frameworks,No,"Web framework for Ruby components. Used only in core, a legacy service."
+Spring,Adopt,Languages & Frameworks,No,Web and DI framework for Kotlin components. This should be the default option for JVM-based services.
+Typescript,Adopt,Languages & Frameworks,No,Used in frontend and BFF applications. This should be the default option instead of Javascript.
+Docker,Adopt,Platform,No,"<a href=""https://docs.docker.com/get-started/overview/"">Docker</a> is an open platform for developing, shipping, and running applications. With Docker, you can manage your infrastructure in the same ways you manage your applications."
+Docker Compose,Adopt,Platform,No,"<a href=""https://docs.docker.com/compose/'>Docker Compose</a> is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services."
+DBeaver,Adopt,Dev Tools,No,"<a href=""https://github.com/dbeaver/dbeaver/wiki"">DBeaver</a> is a universal database management tool for everyone who needs to work with data in a professional way."
+Visual Studio Code,Adopt,Dev Tools,No,"<a href=""https://code.visualstudio.com/docs"">Visual Studio Code</a> is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. "
+aws-vault,Adopt,Platform,No,"<a href=""https://github.com/99designs/aws-vault"">AWS Vault</a> is a tool to securely store and access AWS credentials in developer's notebooks. It <b>must</b> be used instead of storing AWS credentials in ~/.aws/credentials or anywhere else in a developer workstation"
+AWS Glue,Adopt,Data Management,No,"<a href=""https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html"">AWS Glue</a> is a serverless data integration service that makes it easy to discover, prepare, and combine data for analytics, machine learning, and application development.<br>
+It's one of the compoments of Creditas' Data Platform."
+Redash,Adopt,Data Management,No,"<a href=""https://redash.io/help/user-guide/getting-started"">Redash</a> is an open source business intelligence web application"
+Metabase,Hold,Data Management,No,"<a href=""https://www.metabase.com/learn/getting-started/getting-started.html"">Metabase</a> is an open source analytics tool used by some teams in Creditas. <br>Note: it's not supported by Data Engineering team."
+Tableau,Adopt,Data Management,No,"<a href=""https://help.tableau.com/current/pro/desktop/en-us/gettingstarted_overview.htm"">Tableau</a> is a visual analytics platform that want to transform the way people use data to solve problems."
+AWS EMR Studio,Adopt,Data Management,No,"<a href=""https://aws.amazon.com/emr/features/studio/"">EMR Studio</a> is an integrated development environment (IDE) that makes it easy for data scientists and data engineers to develop, visualize, and debug data engineering and data science applications written in R, Python, Scala, and PySpark."
+DMS,Adopt,Data Management,No,"<a href=""https://docs.aws.amazon.com/dms/"">Database Migration Service (DMS)</a> is an AWS service for data base migrations. It's one of the main components in Creditas' Data Platform"
+Debezium,Adopt,Data Management,No,Doc - Debezium is an open source distributed platform for change data capture
+Amundsen ,Adopt,Data Management,Yes,"Doc - Amundsen is a data discovery and metadata engine for improving the productivity of data analysts, data scientists and engineers when interacting with data."
+EMR Notebook,Adopt,Data Management,Yes,"Doc - An EMR notebook is a ""serverless"" notebook that you can use to run queries and code."
+Terraform,Adopt,Platform,No,"<a href=""https://www.terraform.io/"">Terraform</a> is the Infrastructure-as-code (IaC) solution used in Creditas to manage our cloud infrastructure"
+GCP,Hold,Platform,No,"<a href=""https://cloud.google.com/"">Google Cloud Platform (GCP)</a> is used by BCredi, and also for hosting Bitcapital, the core banking solution used by Creditas Digital Banking. Creditas infrastructure should use AWS instead."
+DataSunrise,Adopt,Data Management,Yes,"Doc - DataSunrise Database Security is a cross-platform, high-performance software secures the databases and data in real-time."
+SumoLogic,Hold,Platform,,"Doc - Sumo Logic provides real-time visibility into AWS, Azure, and GCP cloud applications and infrastructure."
+AWS Athena,Adopt,Data Management,No,Doc - Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
+lakeFS,Trial,Data Management,Yes,Doc - lakeFS is an open-source tool that transforms your object storage to Git-like repositories.
+Snowplow,Hold,Data Management,No,"Doc - Snowplow gives teams complete flexibility and control over how behavioral data is collected, structured, processed, modeled and stored."
+Google Analytics 360 (GA 360),Adopt,Platform,No,"Doc - Google Analytics 360 has tools to better understand customers. You can then use those insights to take action, such as improving your website, creating tailored audience lists, and more."
+Google Tag Manager (GTM) Server Side,Adopt,Data Management,No,"Doc - Tag Manager let to add and update tags for conversion tracking, site analytics, remarketing, and more. "
+Oracle Responsys,Adopt,Platform,Yes,Doc - Oracle Responsys apps lets integrate with various external systems to create programs and campaign messages.
+Hubspot,Hold,Platform,No,"Doc - HubSpot offers a full platform of marketing, sales, customer service, and CRM software."
+SegmentIO,Assess,Data Management,Yes,"Doc - Segment is a customer data platform (CDP) that helps you collect, clean, and activate your customer data."
+Salesforce,Adopt,Platform,Yes,"Doc - Salesforce provides customer relationship management services and enterprise applications focused on customer service, marketing automation, analytics, and application development."
+DVC,Adopt,Data Management,No,Doc - Data Version Control - Open source Version Control System for Machine Learning Projects.
+Google Optimize,Adopt,Platform,No,Doc - Google Optimize is a optimization tool that helped online marketers and webmasters increase visitor conversion rates and overall visitor satisfaction by continually testing different combinations of website content.
+Campaign Manager 360,Adopt,Platform,No,"Doc - Campaign Manager 360 is a web-based ad management system for advertisers and agencies. It helps you manage your digital campaigns across websites and mobile. This includes a robust set of features for ad serving, targeting, verification, and reporting."
+Firebase ,Adopt,Data Management,No,Doc - Firebase is a platform for creating mobile and web applications.
+Contentful ,Adopt,Platform,No,"Doc - Contentful is an API-first content platform that helps you manage content, orchestrate experiences and deliver on any digital touchpoint."
+Unbounce ,Adopt,Platform,No,Doc - Unbounce landing pages improve conversion rates & drive business.
+Wordpress ,Adopt,Platform,No,Doc - WordPress is a free and open-source content management system. 
+Zendesk,Adopt,Platform,No,"Doc - Zendesk provides software-as-a-service products related to customer support, sales, and other customer communications"
+Google Data Studio,Hold,Data Management,No,Doc - Google Data Studio is an online tool for converting data into customizable informative reports and dashboards .
+Power BI,Hold,Data Management,No,Doc - Power BI is an interactive data visualization with primary focus on business intelligence.
+Amplitude Analytics,Assess,Data Management,Yes,Doc - Amplitude is a product analytics platform that helps businesses to track visitors with the help of collaborative analytics. The platform uses behavioral reports to understand users' interactions with products and provides insights to accelerate work on a real-time basis.
+Appsflyer ,Adopt,Platform,No,Doc - AppsFlyer is a SaaS mobile marketing analytics and attribution platform.
+Stitch ,Hold,Data Management,No,"Doc - Stitch rapidly moves data from 130+ sources into a data warehouse. Moves data from Hubspot and Zendesk to Creditas Data Plataform, and some others source"
+Supermetrics ,Adopt,Platform,No,Doc - Supermetrics can independently get all of marketing data from different platforms.
+Mulesoft,Adopt,Platform,No,"Doc - MuleSoft unifies data to deliver a single view of the customer, automates business processes, and builds connected experiences."
+Bitrix,Hold,Platform,No,"<a href=""https://www.bitrix24.com/"">Bitrix24</a> is a CRM, Project Management & Collaboration Platform used by Volanty's legacy systems"
+OpenAPI,Adopt,Languages & Frameworks,No,"<a href=""https://www.openapis.org/"">OpenAPI</a> is an open standard, and it's used to document our APIs, and publish them to our Developer Hub. You can find instructions on how to publish them <a href=""https://developerhub.creditas.com/docs/default/component/developerhub"">here</a>"
+split.io,Adopt,Dev Tools,No,"<a href=""https://split.io"">split.io</a> is the official platform for Feature Toggles used in Creditas"
